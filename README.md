@@ -1,9 +1,5 @@
 # Contract Analysis Application
 
-> ⚠️ **DISCLAIMER**
->
-> This application is a prototype intended for proof of concept and demonstration purposes only. It is not designed, tested, or supported for production use. Use at your own risk. Microsoft makes no warranties, express or implied, regarding the functionality, reliability, or suitability of this code for any purpose. For production scenarios, please consult official Microsoft documentation and implement appropriate security, scalability, and compliance measures.
-
 A modern web application for analyzing contracts using Azure AI Document Intelligence (Content Understanding) and Azure OpenAI. Features a three-pane UI with document viewing, content extraction, and intelligent Q&A capabilities.
 
 ## Features
@@ -234,3 +230,8 @@ MIT
 For issues or questions, please check the Azure documentation:
 - [Azure AI Document Intelligence](https://learn.microsoft.com/azure/ai-services/document-intelligence/)
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)
+
+
+> ⚠️ **DISCLAIMER**
+>
+> This application is a prototype intended for proof of concept and demonstration purposes only. It is not designed, tested, or supported for production use. Use at your own risk. Microsoft makes no warranties, express or implied, regarding the functionality, reliability, or suitability of this code for any purpose. For production scenarios, please consult official Microsoft documentation and implement appropriate security, scalability, and compliance measures.
