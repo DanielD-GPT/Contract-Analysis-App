@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Analysis Application</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <h1>📄 Contract Analysis</h1>
+      <div class="upload-section">
+        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+        <button id="uploadBtn" class="btn-primary">Upload Contract</button>
+        <span id="fileName" class="file-name"></span>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Left Pane: Document Viewer -->
+      <div class="pane document-viewer">
+        <div class="pane-header">
+          <h2>Document Viewer</h2>
+          <div id="pageNavigation" class="page-navigation" style="display: none;">
+            <button id="prevPageBtn" class="nav-btn" title="Previous Page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <span class="page-info">
+              <input type="number" id="pageInput" class="page-input" min="1" value="1">
+              <span>of <span id="totalPages">1</span></span>
+            </span>
+            <button id="nextPageBtn" class="nav-btn" title="Next Page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="pane-content" id="documentViewerContent">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <p>Upload a contract document to begin analysis</p>
+          </div>
+          <div id="pdfContainer" style="display: none;">
+            <div id="pdfWrapper" class="pdfWrapper">
+              <canvas id="pdfCanvas"></canvas>
+              <div id="textLayer" class="textLayer"></div>
+              <div id="boundingBoxLayer" class="boundingBoxLayer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Pane: Content List -->
+      <div class="pane content-list">
+        <div class="pane-header">
+          <h2>Document Sections</h2>
+          <div class="header-controls">
+            <span id="itemCount" class="item-count">0 items</span>
+            <button id="restoreBtn" class="restore-btn" style="display: none;">
+              Restore All
+            </button>
+          </div>
+          <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search document sections...">
+            <button id="clearSearchBtn" class="clear-search-btn" style="display: none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="heading">Headings</button>
+            <button class="filter-btn" data-filter="paragraph">Paragraphs</button>
+          </div>
+        </div>
+        <div class="pane-content" id="contentListContent">
+          <div class="empty-state">
+            <p>No content extracted yet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Pane: Details & Q&A -->
+      <div class="pane details-pane">
+        <div class="pane-header">
+          <h2>Details & Q&A</h2>
+        </div>
+        <div class="pane-content" id="detailsContent">
+          <!-- Selected Content Details -->
+          <div id="contentDetails" style="display: none;">
+            <h3>Selected Content</h3>
+            <div id="selectedContent" class="selected-content"></div>
+            <div class="content-meta">
+              <span id="contentPage" class="meta-badge"></span>
+              <span id="contentType" class="meta-badge"></span>
+            </div>
+          </div>
+
+          <!-- Q&A Section -->
+          <div id="qaSection">
+            <h3>Ask Questions</h3>
+            <div class="qa-container">
+              <div id="chatHistory" class="chat-history"></div>
+              <div class="qa-input-group">
+                <textarea 
+                  id="questionInput" 
+                  placeholder="Ask a question about the contract..."
+                  rows="3"
+                ></textarea>
+                <button id="askBtn" class="btn-primary" disabled>Ask</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+      <div class="spinner"></div>
+      <p>Processing document...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
